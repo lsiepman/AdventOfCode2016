@@ -7,6 +7,7 @@ Created on Fri Jun 26 20:40:56 2020.
 
 # IMPORTS
 import re
+from itertools import permutations
 
 # DATA
 password = "abcdefgh"
@@ -91,6 +92,10 @@ def rotate_position(instruction, word):
         num_shift += 2
     else:
         num_shift += 1
+
+    if num_shift > len(word):
+        num_shift = num_shift - len(word)
+
     new_word = word[-num_shift:] + word[:-num_shift]
 
     return new_word
@@ -133,6 +138,24 @@ def find_answer_1(word, data):
         else:
             print("Error, unexpected instruction")
 
-    print(f"The scrambled password is: {word}")
+    return word
 
-find_answer_1(password, data)
+print(f"The scrambled password is: {find_answer_1(password, data)}")
+
+
+# GOAL 2
+"""You scrambled the password correctly,
+but you discover that you can't actually modify the password file on the
+system. You'll need to un-scramble one of the existing passwords by
+reversing the scrambling process.
+
+What is the un-scrambled version of the scrambled password fbgdceah?"""
+
+# ANSWER 2
+possible_inputs = [''.join(p) for p in permutations('abcdefgh')]
+
+for i in possible_inputs:
+    word = find_answer_1(i, data)
+    if word == "fbgdceah":
+        print(f"The unscrambled password is: {i}")
+        break
