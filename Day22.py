@@ -112,3 +112,6 @@ for i in range(len(data)):
     map_data.loc[y, x] = token
 
 map_data.to_csv("Day22_map.csv")
+
+# This one is not solvable by code. See the Day22_map.xlsx file for my counting
+# (selecting the paths in a spreadsheet does the counting for you)
